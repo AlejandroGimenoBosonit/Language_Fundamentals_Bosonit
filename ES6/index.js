@@ -272,9 +272,78 @@ const makeServerRequest1 = new Promise((resolve, reject) => {
 
 
 
-makeServerRequest.then(result => {
+makeServerRequest
+  .then(result => {
     console.log(result);
-});
+  });
 
 
 //Handle a Rejected Promise with catch
+const makeServerRequest2 = new Promise((resolve, reject) => {
+  // responseFromServer is set to false to represent an unsuccessful response from a server
+  let responseFromServer = false;
+    
+  if(responseFromServer) {
+    resolve("We got the data");
+  } else {  
+    reject("Data not received");
+  }
+});
+
+makeServerRequest2
+  .then(result => {console.log(result);})
+  .catch(error => console.log(error));
+
+//Using the Test Method
+let myString = "Hello, World!";
+let myRegex = /Hello/;
+console.log(myRegex.test(myString)); //true
+
+
+//Compare Scopes of the var and let Keywords
+function checkScope() {
+  let i = 'function scope';
+  if (true) {
+    let i = 'block scope';
+    console.log('Block scope i is: ', i);
+  }
+  console.log('Function scope i is: ', i);
+  return i;
+}
+
+//Mutate an Array Declared with const
+const s = [5, 7, 2];
+function editInPlace() {
+  // Only change code below this line
+  // es const epro hemos podido editarlo
+  s[0] = 2;
+  s[1] = 5;
+  s[2] = 7;
+  // Only change code above this line
+}
+// editInPlace();
+console.log(editInPlace());
+
+//Prevent Object Mutation
+/*
+As seen in the previous challenge, const declaration alone doesn't 
+really protect your data from mutation. To ensure your data doesn't change, 
+JavaScript provides a function Object.freeze to prevent data mutation.
+
+Any attempt at changing the object will be rejected, with an error thrown 
+if the script is running in strict mode.
+*/
+
+function freezeObj() {
+  const MATH_CONSTANTS = {PI: 3.14};
+  // Only change code below this line
+  Object.freeze(MATH_CONSTANTS);
+  // Only change code above this line
+  try {
+    MATH_CONSTANTS.PI = 99;
+  } catch(ex) {
+    console.log(ex);
+  }
+  return MATH_CONSTANTS.PI;
+}
+const PI = freezeObj();
