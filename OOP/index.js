@@ -95,7 +95,7 @@ function Dog(name) {
 
 Dog.prototype.numLegs = 4;
 // Only change code above this line
-let beagle = new Dog("Snoopy");
+let beagle4 = new Dog("Snoopy");
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -287,8 +287,8 @@ Bird.prototype.constructor = Bird;
 Dog.prototype.constructor = Dog;
 
 //creating a new instance
-let duck   = new Bird();
-let beagle = new Dog();
+let duck2   = new Bird();
+let beagle2 = new Dog();
 
 duck.name = "Donald";
 beagle.name = "Tobby";
