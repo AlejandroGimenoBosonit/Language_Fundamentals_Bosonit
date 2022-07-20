@@ -1,31 +1,29 @@
-// declare a 'Person' constructor with local methods
-function Person(firstName, secondName, age, genre){
-    this.fullName = {
-        firstName,
-        secondName
-    };
-    this.age = age;
-    this.genre = genre;
+// parent 'class'
+function Animal() {
+    // parameters than can change
+    this.numLegs = 4
+};
+//setting prototype porperties shared in all the inheritence
+// these properties cannot be modified
+Animal.prototype = {
+    eat: true
 };
 
-//setting a prototype 
-// Person.prototype.sayHi = function(){
-//     console.log(`Hello! I'm ${this.fullName.secondName}, ${this.fullName.firstName} ${this.fullName.secondName}`);
-// };
 
-Person.prototype = {
-    constructor: Person,
-    sayHi: function(){
-        console.log(`Hello! I'm ${this.fullName.secondName}, ${this.fullName.firstName} ${this.fullName.secondName}`);
-    }
-};
 
-/////////////////////////////////////////////////////////////////////////////////////////////
-
-function Teacher(firstName, secondName, age, genre, salary){
-    
-    Person.call(this, firstName, secondName, age, genre);
-
-    this.salary = salary;
+function Dog(name){
+    // parameters than can change
+    this.name = name;
 }
 
+//INHERITANCE
+Dog.prototype = Object.create(Animal.prototype);
+//If we want to reset inheritance
+// Dog.prototype.constructor = Dog;
+
+//setting prototype porperties shared in all the inheritence
+// these properties cannot be modified
+Dog.prototype = {
+    bark: function(){ console.log('Woof!');},
+    canFly: false
+};
