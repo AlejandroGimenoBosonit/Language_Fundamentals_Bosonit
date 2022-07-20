@@ -182,22 +182,35 @@ Crea una función que convierta un número de bytes en un formato con valores le
 
 */
 
-function fromBytesToFormattedSizeUnits(num, par = 3){
-  let prefix = {'3':'KB', '6':'MB', '9':'GB', '12':'TB', '15':'PB', '18':'EB', '21':'ZB', '24':'YB'};
-  
-  console.log(Math.trunc((num).toPrecision(par)));
-  
-  //let not = num.toPrecision(par)// 1.00e+3                 1.23e+8              -1.2145e+10
+function fromBytesToFormattedSizeUnits(num, par = 3) {
+  const scale = {3:'KB', 6:'MB', 9:'GB', 12:'TB', 15:'PB', 18:'EB', 21:'ZB', 24:'YB'};
 
+  let newNum = parseFloat(num.toPrecision(par)).toString().split('0');
+  let exp = newNum.filter(element => element==='').length;
+  let entirePart = newNum[0];
+
+  while(entirePart.length> 3){
+    exp+=3;
+    entirePart = entirePart.replace(entirePart.substring(entirePart.length-3, entirePart.length), "")
+  }
+  return entirePart+scale[exp];
 }
 
+
+  //let not = num.toPrecision(par)// 1.00e+3                 1.23e+8              -1.2145e+10
+ // let prefix = {'3':'KB', '6':'MB', '9':'GB', '12':'TB', '15':'PB', '18':'EB', '21':'ZB', '24':'YB'};
 
 
 // const result = fromBytesToFormattedSizeUnits(123456789);
 // result; // 123MB 
-fromBytesToFormattedSizeUnits(1000); // 1 KB
-fromBytesToFormattedSizeUnits(123456789); // 123456 KB
-fromBytesToFormattedSizeUnits(-12145489451.5932, 5); //-12.145GB
+const resultA = fromBytesToFormattedSizeUnits(1000);
+console.log(resultA); // 1KB
+ 
+const resultB = fromBytesToFormattedSizeUnits(123456789);
+console.log(resultB); // 123MB
+ 
+const resultC = fromBytesToFormattedSizeUnits(-12145489451.5932, 5);
+console.log(resultC); // -12.145GB
 
 
 
