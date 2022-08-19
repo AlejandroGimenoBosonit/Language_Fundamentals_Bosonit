@@ -7,7 +7,7 @@ const arrNames = [
     {id: 4, name: 'Toby'},
     {id: 5, name: 'Lala'}
   ];
-console.log(arrNames[2]);
+console.log(arrNames.find(( object )=> object.id === 3));
 ///////////////////////////////////////// EJ2
 //Dado un array de valores, devolver un array truthy 
 //(sin valores nulos, vacíos, no números, indefinidos o falsos)
@@ -18,15 +18,24 @@ function cleanArray(arr){
   let resul = [];
   let error = [NaN, false, '', undefined, null];
 
-  for(let i=0 ; i<arr.length ; i++){
-    if(error.includes(arr[i])===false){
-      resul.push(arr[i])
-    }
-  }
+  arrDirty.forEach( (element) =>{
+      if(error.includes(element)===false){
+        resul.push(element)
+      }
+  } )
+
+  
+  // for(let i=0 ; i<arr.length ; i++){
+  //   if(error.includes(arr[i])===false){
+  //     resul.push(arr[i])
+  //   }
+  // }
 
   return resul;
 };
-console.log(cleanArray(arrDirty));
+
+const dirty2 = (arr) => arr.filter( (element) => element);
+console.log(dirty2(arrDirty));
 
 
 ///////////////////////////////////////// EJ3
@@ -39,41 +48,51 @@ const arrCities = [
   {city: 'Oslo', country: 'Norway', capital: true},
   {city: 'Jaén', country: 'Spain', capital: false}
 ];
-function capitalCities(arr){
-  arr.forEach(obj => {
-    if(obj.capital) console.log(obj.city);
-  })
-};
-capitalCities(arrCities);
+const capitalCities = (arr) => arr.filter(({capital, country}) => !capital && country==='Spain');
+  // arr.forEach(obj => {
+  //   if(obj.capital) console.log(obj.city);
+  // })
+  // return newArr;
+
+console.log(capitalCities(arrCities));
 
 ///////////////////////////////////////// EJ4
 //Dado tres arrays de números, sacar en un nuevo array la intersección de estos. 
 //Comporbacion de elementos comunes en los tres arrays
 
+// const arrNumber1 = [1,2,3];
+// const arrNumber2 = [1,2,3,4,5];
+// const arrNumber3 = [1,4,7,2];
+// numeros comunes a los tres: 1, 2
+
+// function interArray(arr1, arr2, arr3){
+//   let newArray = [];
+
+//   // some - js array
+
+//   // check longest array
+//   let m = [arr1, arr2, arr3];
+
+//   let shortest = m.filter(element=> element.length === Math.min(...m.map(element => element.length)))[0] //[1,2,3];
+
+//   //iterate and compare with the rest of arrays
+//   let adyArr1 = m.filter(element => element.length > shortest.length)[0]; //[ 1, 2, 3, 4, 5]
+//   let adyArr2 = m.filter(element => element.length > shortest.length)[1]; //[ 1, 4, 7, 2 ]
+
+//   shortest.forEach(element => {
+//     if(adyArr1.includes(element) && adyArr2.includes(element)) newArray.push(element)
+//   })
+
+//   console.log(newArray);
+// };
+
 const arrNumber1 = [1,2,3];
 const arrNumber2 = [1,2,3,4,5];
 const arrNumber3 = [1,4,7,2];
-// numeros comunes a los tres: 1, 2
+const globalArr = [arrNumber1, arrNumber2, arrNumber3];
 
-function interArray(arr1, arr2, arr3){
-  let newArray = [];
-
-  // check longest array
-  let m = [arr1, arr2, arr3];
-
-  let shortest = m.filter(element=> element.length === Math.min(...m.map(element => element.length)))[0] //[1,2,3];
-
-  //iterate and compare with the rest of arrays
-  let adyArr1 = m.filter(element => element.length > shortest.length)[0]; //[ 1, 2, 3, 4, 5]
-  let adyArr2 = m.filter(element => element.length > shortest.length)[1]; //[ 1, 4, 7, 2 ]
-
-  shortest.forEach(element => {
-    if(adyArr1.includes(element) && adyArr2.includes(element)) newArray.push(element)
-  })
-
-  console.log(newArray);
-};
-interArray(arrNumber1, arrNumber2, arrNumber3);
+const interArray = () => globalArr.reduce( ( prevValue, currentValue ) => prevValue.filter( element => currentValue.includes(element)));
+console.log(interArray());
 
 
 ///////////////////////////////////////// EJ5
@@ -91,18 +110,20 @@ const arrCities2 = [
   {city: 'Jaén', country: 'Spain', capital: false}
 ];
 
-function newArr(arr){
-  let newArray = [];
-  const noCap = arr.filter(obj => !obj.capital);
-  for(let i=0 ; i<noCap.length ;i++){
-    if(noCap[i].country === 'Spain') {
-      newArray.push({ city: noCap[i].city, isSpain: true});
-    }else{
-      newArray.push({ city: noCap[i].city, isSpain: false});
-    }
-  }
-  return newArray;
-};
+// function newArr(arr){
+//   let newArray = [];
+//   const noCap = arr.filter(obj => !obj.capital);
+//   for(let i=0 ; i<noCap.length ;i++){
+//     if(noCap[i].country === 'Spain') {
+//       newArray.push({ city: noCap[i].city, isSpain: true});
+//     }else{
+//       newArray.push({ city: noCap[i].city, isSpain: false});
+//     }
+//   }
+//   return newArray;
+// };
+
+const newArr = (arr) => arr.filter( ({capital}) => !capital ).map( ({city, country}) => ({city, isSpain: country==='Spain'}));
 console.log(newArr(arrCities2));
 
 
@@ -124,30 +145,34 @@ console.log(roundedResult); // 1.123457
 
 */
 
-function roundedFloat(num, dec){
-  // string conversion
-  let numToString = num.toString();
-  // obtain index
-  let index = numToString.indexOf('.')+dec;
-  // obtain number to round
-  let numToChange = numToString[index];
-  // rounding
-  if(numToChange > 5) {
-    numToChange++;
-  }else{
-    numToChange--;
-  }
+// function roundedFloat(num, dec){
+//   // string conversion
+//   let numToString = num.toString();
+//   // obtain index
+//   let index = numToString.indexOf('.')+dec;
+//   // obtain number to round
+//   let numToChange = numToString[index];
+//   // rounding
+//   if(numToChange > 5) {
+//     numToChange++;
+//   }else{
+//     numToChange--;
+//   }
 
-  //replace
-  let final = numToString.substring(0, index+1);
+//   //replace
+//   let final = numToString.substring(0, index+1);
 
-  // return a rounded float number
-  return parseFloat(final.replace(final[final.length-1] ,numToChange))
+//   // return a rounded float number
+//   return parseFloat(final.replace(final[final.length-1] ,numToChange))
 
-};
+// };
 // roundedFloat(33.5664535677, 2)
 // roundedFloat(1.123456789, 6)
-console.log(roundedFloat(1.123456789, 6));
+
+const roundedFloat = (num, dec) => {
+  return Math.round(num*10**dec)/10**dec
+};
+console.log(roundedFloat(1.123456789, 4));
 
 ///////////////////////////////////////// EJ7
 /*
@@ -160,15 +185,19 @@ La fundación debe tener dos parámetros:
 
 */
 
-function returnFalsyValues(obj, typeFunction){
-  let temp = {};
-  for (const key in obj) {
-    if(!typeFunction(obj[key])) temp[key] = obj[key];
-  }
-  return temp;
+// function returnFalsyValues(obj, typeFunction){
+//   let temp = {};
+//   for (const key in obj) {
+//     if(!typeFunction(obj[key])) temp[key] = obj[key];
+//   }
+//   return temp;
+// };
+// const result = returnFalsyValues({ a: 1, b: '2', c: 3 }, x => typeof x === 'string')
+
+const returnFalsyValues = ( obj, typeFunction ) => {
+  return Object.keys(obj).filter( (key) => !typeFunction( obj[key] ) ).reduce( (acc, key) => acc[key] = obj[key], {})
 };
-const result = returnFalsyValues({ a: 1, b: '2', c: 3 }, x => typeof x === 'string')
-console.log(result); // {a: 1, c: 3}
+console.log(returnFalsyValues({ a: 1, b: '2', c: 3 }, x => typeof x === 'string')); // {a: 1, c: 3}
 
 ///////////////////////////////////////// EJ8 -----------------------------------------------------------------------------------
 /*
@@ -224,18 +253,35 @@ La función debe tener un objeto como único parámetro.
 
 */
 const myObject = { NamE: 'Charles', ADDress: 'Home Street' };
-function toLowercaseKeys(obj){
-  //empty object
-  let keys = {};
-  // Iterate generated object's keys array
-  Object.keys(obj).forEach(element => {
-    //assign new value to the empty object
-    keys[element.toLowerCase()] = obj[element];
-  });
-  return keys;
+const  toLowercaseKeys = (obj) => {
+  // //empty object
+  // const keys = {};
+  // // Iterate generated object's keys array
+  // Object.keys(obj).forEach(element => {
+  //   //assign new value to the empty object
+  //   keys[element.toLowerCase()] = obj[element];
+  // });
+  // return keys;
+
+  // {}
+  // [ key1, key2 ]
+
+
+
+
+
+  return Object.keys(obj).reduce( (acc,key) => {
+    console.log(acc);
+    console.log(key);
+    acc[key.toLowerCase()] = obj[key]
+    return acc;
+  } 
+    ,{})
+
 };
 const myObjLowercase = toLowercaseKeys(myObject);
-console.log(myObjLowercase); // { name: 'Charles', address: 'Home Street' }
+// console.log(myObjLowercase); // { name: 'Charles', address: 'Home Street' }
+// console.log(myObject);
 
 
 ///////////////////////////////////////// EJ10
@@ -259,6 +305,8 @@ function removeHTMLTags(str){
 };
 const result2= removeHTMLTags('<div><span>lorem</span> <strong>ipsum</strong></div>');
 console.log(result2); // lorem ipsum
+
+// REGEX
 
 
 ///////////////////////////////////////// EJ11
@@ -284,5 +332,15 @@ function splitArrayIntoChunks(arr, div){
   res.push(subArr);
   return res;
 };
-const result3 = splitArrayIntoChunks([1, 2, 3, 4, 5, 6, 7], 3);
+
+const split2 = (arr, size) => {
+  return arr.reduce( (acc, item, index) => {
+    const array =  arr.slice(index*size,index*size+size);
+    if(array.length>0)acc.push( array );
+    
+    return acc;
+  } ,[])
+}
+
+const result3 = split2([1, 2, 3, 4, 5, 6, 7], 3);
 console.log(result3); // [ [ 1, 2, 3 ], [ 4, 5, 6 ], [ 7 ] ]
