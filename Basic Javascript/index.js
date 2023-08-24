@@ -287,12 +287,12 @@ myArray.unshift(["Paul", 35])
 ////////////////////////////////////////////////////////////////////
 //Shopping List
 const myList = [
-    ["Milk", 1],
-    ["eggs",2],
-    ["bread",3],
-    ["coffee",4],
-    ["Soap",5]
-  ];
+  ["Milk", 1],
+  ["eggs",2],
+  ["bread",3],
+  ["coffee",4],
+  ["Soap",5]
+];
 ////////////////////////////////////////////////////////////////////
 //Write Reusable JavaScript with Functions
 function reusableFunction() {

@@ -1,30 +1,29 @@
 ///////////////////////////////////////// EJ1
 // Dado un array de objetos, obtener el objeto con el id 3
 const arrNames = [
-    {id: 1, name: 'Pepe'},
-    {id: 2, name: 'Juan'},
-    {id: 3, name: 'Alba'},
-    {id: 4, name: 'Toby'},
-    {id: 5, name: 'Lala'}
-  ];
-console.log(arrNames.find(( object )=> object.id === 3));
+  { id: 1, name: "Pepe" },
+  { id: 2, name: "Juan" },
+  { id: 3, name: "Alba" },
+  { id: 4, name: "Toby" },
+  { id: 5, name: "Lala" },
+];
+console.log(arrNames.find((object) => object.id === 3));
 ///////////////////////////////////////// EJ2
-//Dado un array de valores, devolver un array truthy 
+//Dado un array de valores, devolver un array truthy
 //(sin valores nulos, vacíos, no números, indefinidos o falsos)
 
-const arrDirty = [NaN, 0, 5, false, -1, '',undefined, 3, null, 'test'];
+const arrDirty = [NaN, 0, 5, false, -1, "", undefined, 3, null, "test"];
 //NaN, false, '', undefined, null
-function cleanArray(arr){
+function cleanArray(arr) {
   let resul = [];
-  let error = [NaN, false, '', undefined, null];
+  let error = [NaN, false, "", undefined, null];
 
-  arrDirty.forEach( (element) =>{
-      if(error.includes(element)===false){
-        resul.push(element)
-      }
-  } )
+  arrDirty.forEach((element) => {
+    if (error.includes(element) === false) {
+      resul.push(element);
+    }
+  });
 
-  
   // for(let i=0 ; i<arr.length ; i++){
   //   if(error.includes(arr[i])===false){
   //     resul.push(arr[i])
@@ -32,32 +31,32 @@ function cleanArray(arr){
   // }
 
   return resul;
-};
+}
 
-const dirty2 = (arr) => arr.filter( (element) => element);
+const dirty2 = (arr) => arr.filter((element) => element);
 console.log(dirty2(arrDirty));
-
 
 ///////////////////////////////////////// EJ3
 //Dado un array de ciudades, sacar todas las ciudades de España que no sean capitales
 const arrCities = [
-  {city: 'Logroño', country: 'Spain', capital: false},
-  {city: 'Paris', country: 'France', capital: true},
-  {city: 'Madrid', country: 'Spain', capital: true},
-  {city: 'Rome', country: 'Italy', capital: true},
-  {city: 'Oslo', country: 'Norway', capital: true},
-  {city: 'Jaén', country: 'Spain', capital: false}
+  { city: "Logroño", country: "Spain", capital: false },
+  { city: "Paris", country: "France", capital: true },
+  { city: "Madrid", country: "Spain", capital: true },
+  { city: "Rome", country: "Italy", capital: true },
+  { city: "Oslo", country: "Norway", capital: true },
+  { city: "Jaén", country: "Spain", capital: false },
 ];
-const capitalCities = (arr) => arr.filter(({capital, country}) => !capital && country==='Spain');
-  // arr.forEach(obj => {
-  //   if(obj.capital) console.log(obj.city);
-  // })
-  // return newArr;
+const capitalCities = (arr) =>
+  arr.filter(({ capital, country }) => !capital && country === "Spain");
+// arr.forEach(obj => {
+//   if(obj.capital) console.log(obj.city);
+// })
+// return newArr;
 
 console.log(capitalCities(arrCities));
 
 ///////////////////////////////////////// EJ4
-//Dado tres arrays de números, sacar en un nuevo array la intersección de estos. 
+//Dado tres arrays de números, sacar en un nuevo array la intersección de estos.
 //Comporbacion de elementos comunes en los tres arrays
 
 // const arrNumber1 = [1,2,3];
@@ -86,14 +85,16 @@ console.log(capitalCities(arrCities));
 //   console.log(newArray);
 // };
 
-const arrNumber1 = [1,2,3];
-const arrNumber2 = [1,2,3,4,5];
-const arrNumber3 = [1,4,7,2];
+const arrNumber1 = [1, 2, 3];
+const arrNumber2 = [1, 2, 3, 4, 5];
+const arrNumber3 = [1, 4, 7, 2];
 const globalArr = [arrNumber1, arrNumber2, arrNumber3];
 
-const interArray = () => globalArr.reduce( ( prevValue, currentValue ) => prevValue.filter( element => currentValue.includes(element)));
+const interArray = () =>
+  globalArr.reduce((prevValue, currentValue) =>
+    prevValue.filter((element) => currentValue.includes(element))
+  );
 console.log(interArray());
-
 
 ///////////////////////////////////////// EJ5
 /*
@@ -102,12 +103,12 @@ con unos nuevos parámetros que sean city y isSpain. El valor de isSpain será u
 booleano indicando si es una ciudad de España.
 */
 const arrCities2 = [
-  {city: 'Logroño', country: 'Spain', capital: false},
-  {city: 'Bordeaux', country: 'France', capital: false},
-  {city: 'Madrid', country: 'Spain', capital: true},
-  {city: 'Florence', country: 'Italy', capital: true},
-  {city: 'Oslo', country: 'Norway', capital: true},
-  {city: 'Jaén', country: 'Spain', capital: false}
+  { city: "Logroño", country: "Spain", capital: false },
+  { city: "Bordeaux", country: "France", capital: false },
+  { city: "Madrid", country: "Spain", capital: true },
+  { city: "Florence", country: "Italy", capital: true },
+  { city: "Oslo", country: "Norway", capital: true },
+  { city: "Jaén", country: "Spain", capital: false },
 ];
 
 // function newArr(arr){
@@ -123,9 +124,11 @@ const arrCities2 = [
 //   return newArray;
 // };
 
-const newArr = (arr) => arr.filter( ({capital}) => !capital ).map( ({city, country}) => ({city, isSpain: country==='Spain'}));
+const newArr = (arr) =>
+  arr
+    .filter(({ capital }) => !capital)
+    .map(({ city, country }) => ({ city, isSpain: country === "Spain" }));
 console.log(newArr(arrCities2));
-
 
 ///////////////////////////////////////// EJ6
 /*
@@ -170,7 +173,7 @@ console.log(roundedResult); // 1.123457
 // roundedFloat(1.123456789, 6)
 
 const roundedFloat = (num, dec) => {
-  return Math.round(num*10**dec)/10**dec
+  return Math.round(num * 10 ** dec) / 10 ** dec;
 };
 console.log(roundedFloat(1.123456789, 4));
 
@@ -194,10 +197,14 @@ La fundación debe tener dos parámetros:
 // };
 // const result = returnFalsyValues({ a: 1, b: '2', c: 3 }, x => typeof x === 'string')
 
-const returnFalsyValues = ( obj, typeFunction ) => {
-  return Object.keys(obj).filter( (key) => !typeFunction( obj[key] ) ).reduce( (acc, key) => acc[key] = obj[key], {})
+const returnFalsyValues = (obj, typeFunction) => {
+  return Object.keys(obj)
+    .filter((key) => !typeFunction(obj[key]))
+    .reduce((acc, key) => (acc[key] = obj[key]), {});
 };
-console.log(returnFalsyValues({ a: 1, b: '2', c: 3 }, x => typeof x === 'string')); // {a: 1, c: 3}
+console.log(
+  returnFalsyValues({ a: 1, b: "2", c: 3 }, (x) => typeof x === "string")
+); // {a: 1, c: 3}
 
 ///////////////////////////////////////// EJ8 -----------------------------------------------------------------------------------
 /*
@@ -212,37 +219,44 @@ Crea una función que convierta un número de bytes en un formato con valores le
 */
 
 function fromBytesToFormattedSizeUnits(num, par = 3) {
-  const scale = {3:'KB', 6:'MB', 9:'GB', 12:'TB', 15:'PB', 18:'EB', 21:'ZB', 24:'YB'};
+  const scale = {
+    3: "KB",
+    6: "MB",
+    9: "GB",
+    12: "TB",
+    15: "PB",
+    18: "EB",
+    21: "ZB",
+    24: "YB",
+  };
 
-  let newNum = parseFloat(num.toPrecision(par)).toString().split('0');
-  let exp = newNum.filter(element => element==='').length;
+  let newNum = parseFloat(num.toPrecision(par)).toString().split("0");
+  let exp = newNum.filter((element) => element === "").length;
   let entirePart = newNum[0];
 
-  while(entirePart.length> 3){
-    exp+=3;
-    entirePart = entirePart.replace(entirePart.substring(entirePart.length-3, entirePart.length), "")
+  while (entirePart.length > 3) {
+    exp += 3;
+    entirePart = entirePart.replace(
+      entirePart.substring(entirePart.length - 3, entirePart.length),
+      ""
+    );
   }
-  return entirePart+scale[exp];
+  return entirePart + scale[exp];
 }
 
-
-  //let not = num.toPrecision(par)// 1.00e+3                 1.23e+8              -1.2145e+10
- // let prefix = {'3':'KB', '6':'MB', '9':'GB', '12':'TB', '15':'PB', '18':'EB', '21':'ZB', '24':'YB'};
-
+//let not = num.toPrecision(par)// 1.00e+3                 1.23e+8              -1.2145e+10
+// let prefix = {'3':'KB', '6':'MB', '9':'GB', '12':'TB', '15':'PB', '18':'EB', '21':'ZB', '24':'YB'};
 
 // const result = fromBytesToFormattedSizeUnits(123456789);
-// result; // 123MB 
+// result; // 123MB
 const resultA = fromBytesToFormattedSizeUnits(1000);
 console.log(resultA); // 1KB
- 
+
 const resultB = fromBytesToFormattedSizeUnits(123456789);
 console.log(resultB); // 123MB
- 
+
 const resultC = fromBytesToFormattedSizeUnits(-12145489451.5932, 5);
 console.log(resultC); // -12.145GB
-
-
-
 
 ///////////////////////////////////////// EJ9
 
@@ -252,8 +266,8 @@ retorne un objeto asegurándose que las claves del objeto estén en lowercase.
 La función debe tener un objeto como único parámetro.
 
 */
-const myObject = { NamE: 'Charles', ADDress: 'Home Street' };
-const  toLowercaseKeys = (obj) => {
+const myObject = { NamE: "Charles", ADDress: "Home Street" };
+const toLowercaseKeys = (obj) => {
   // //empty object
   // const keys = {};
   // // Iterate generated object's keys array
@@ -266,23 +280,16 @@ const  toLowercaseKeys = (obj) => {
   // {}
   // [ key1, key2 ]
 
-
-
-
-
-  return Object.keys(obj).reduce( (acc,key) => {
+  return Object.keys(obj).reduce((acc, key) => {
     console.log(acc);
     console.log(key);
-    acc[key.toLowerCase()] = obj[key]
+    acc[key.toLowerCase()] = obj[key];
     return acc;
-  } 
-    ,{})
-
+  }, {});
 };
 const myObjLowercase = toLowercaseKeys(myObject);
 // console.log(myObjLowercase); // { name: 'Charles', address: 'Home Street' }
 // console.log(myObject);
-
 
 ///////////////////////////////////////// EJ10
 /*
@@ -290,24 +297,25 @@ Crea una función que elimine las etiquetas html o xml de un string.
 La función debe tener un string como único parámetro.
 */
 
-
-function removeHTMLTags(str){
+function removeHTMLTags(str) {
   let pile = [];
   //iterate string
   for (let i = 0; i < str.length; i++) {
     //add element to the pile
     pile.push(str[i]);
     // check if html tag is closed, delete itfrom the pile
-    if(pile[pile.length-1] === ">") pile.splice(pile.indexOf("<"), pile.indexOf(">")+1);
+    if (pile[pile.length - 1] === ">")
+      pile.splice(pile.indexOf("<"), pile.indexOf(">") + 1);
   }
   //return a string from chars array
-  return pile.join('');
-};
-const result2= removeHTMLTags('<div><span>lorem</span> <strong>ipsum</strong></div>');
+  return pile.join("");
+}
+const result2 = removeHTMLTags(
+  "<div><span>lorem</span> <strong>ipsum</strong></div>"
+);
 console.log(result2); // lorem ipsum
 
 // REGEX
-
 
 ///////////////////////////////////////// EJ11
 /*
@@ -318,29 +326,62 @@ El segundo parámetro es el número de elementos que deben tener los arrays en l
 
 */
 
-function splitArrayIntoChunks(arr, div){
+function splitArrayIntoChunks(arr, div) {
   let res = [];
   let subArr = [];
   // iterate arr
   for (let i = 0; i < arr.length; i++) {
-    if(subArr.length===div){
+    if (subArr.length === div) {
       res.push(subArr);
-      subArr=[];
+      subArr = [];
     }
     subArr.push(arr[i]);
   }
   res.push(subArr);
   return res;
-};
+}
 
 const split2 = (arr, size) => {
-  return arr.reduce( (acc, item, index) => {
-    const array =  arr.slice(index*size,index*size+size);
-    if(array.length>0)acc.push( array );
-    
+  return arr.reduce((acc, item, index) => {
+    const array = arr.slice(index * size, index * size + size);
+    if (array.length > 0) acc.push(array);
+
     return acc;
-  } ,[])
-}
+  }, []);
+};
 
 const result3 = split2([1, 2, 3, 4, 5, 6, 7], 3);
 console.log(result3); // [ [ 1, 2, 3 ], [ 4, 5, 6 ], [ 7 ] ]
+
+////////////////////////////////////////////////////////////////////////
+//s acar los numeros pares de una sucesion
+for (let i = 1; i <= 100; i += 2) {
+  console.log(i);
+}
+// arrays
+let str1 = "hola / te / llamo / Juan";
+let str2 = "hola / me / llamo / Juan / y / soy / programador";
+
+// let longest = str1.split("/").map(e => e.trim())
+// let shortest = str2.split("/").map(e => e.trim())
+
+let longest = str2.replaceAll(" ", "").split("/");
+let shortest = str1.replaceAll(" ", "").split("/");
+
+longest.map((e, i, arr) =>
+  shortest[i] === undefined
+    ? console.log(` +${e}`)
+    : shortest[i] === e
+    ? console.log(`=${e}`)
+    : console.log(`-${shortest[i]} \n+${e}`)
+);
+
+// longest.map((element,index,arr) =>{
+//   if(shortest[index] === undefined){
+//     console.log(` +${element}`);
+//   }else if(shortest[index] === element){
+//       console.log("="+element);
+//       }else{
+//         console.log(`-${shortest[index]} \n+element`);
+//       }
+// })

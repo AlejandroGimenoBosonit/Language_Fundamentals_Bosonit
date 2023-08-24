@@ -426,3 +426,10 @@ let funModule = (function(){
         }
     }
 })();
+
+/**
+ * absstraccion
+ * polimorfimos
+ * encapsulacion
+ * herencia
+ */
